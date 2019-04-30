@@ -1,27 +1,37 @@
 using System;
-using Xunit;
-using Xunit.Abstractions;
+using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Xunit;
+//using Xunit.Abstractions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Firefox;   
 using OpenQA.Selenium.Chrome;    
 using OpenQA.Selenium.IE;
+//using Xunit.Sdk;
 
-public class SeleniumTests : IDisposable
+[TestClass]
+public class SeleniumTests// : IDisposable
 {
     private IWebDriver driver;
-    private readonly ITestOutputHelper output;
+    //private readonly ITestOutputHelper output;
 
-    public SeleniumTests(ITestOutputHelper output)
+    public SeleniumTests()
     {
-        this.output = output;
+
+    }
+
+    //[TestInitialize()]
+    public void TestInitialize()//ITestOutputHelper output)
+    {
+        //this.output = output;
 
         string appURL = "https://sandylinux.azurewebsites.net";
 
 
         var options = new FirefoxOptions();
         string geckoPath = Environment.GetEnvironmentVariable("GeckoWebDriver");
-        output.WriteLine(geckoPath);                // comment out deze als je zelf wil testen
+        //output.WriteLine(geckoPath);                // comment out deze als je zelf wil testen
         driver = new FirefoxDriver(geckoPath);      // deze ook
         //driver = new FirefoxDriver();             // en gebruik deze
         driver.Navigate().GoToUrl(appURL);
@@ -29,26 +39,26 @@ public class SeleniumTests : IDisposable
         waitUntilCountElementEquals(10, "sandy_incoming_msg", 2);
     }
 
-    [Fact]
+    [TestMethod]
     public void GreetingsTest()
     {
         string[] msgs = GetResponse("hoi");
 
         string expected = "Hallo!";
         string actual = msgs[0];
-        Assert.Equal(expected, actual);
+        Assert.AreEqual(expected, actual);
 
         UnknownQuestionTest();
     }
 
-    [Fact]
+    [TestMethod]
     public void UnknownQuestionTest()
     {
         string[] msgs = GetResponse("Hoe heet ik?", 4);
 
         string expected = "Wil je een email adres opgeven?";
         string actual = msgs[3];
-        Assert.Equal(expected, actual);
+        Assert.AreEqual(expected, actual);
     }
 
     private string[] GetResponse(string message, int nExpectedResponseMsgs = 1)
@@ -63,7 +73,7 @@ public class SeleniumTests : IDisposable
 
         // test if we received the expected amount of response messages
         int totalMsgs = driver.FindElements(By.ClassName("sandy_incoming_msg")).Count;
-        Assert.Equal(totalMsgs, totalMsgsExpected);
+        Assert.AreEqual(totalMsgs, totalMsgsExpected);
 
         string[] responses = new string[nExpectedResponseMsgs];
         for (int i = 0; i < responses.Length; i++)
@@ -89,6 +99,7 @@ public class SeleniumTests : IDisposable
         }
     }
 
+    [TestCleanup()]
     public void Dispose()
     {
         driver.Quit();
