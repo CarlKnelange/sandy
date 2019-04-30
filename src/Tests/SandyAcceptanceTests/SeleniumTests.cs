@@ -21,7 +21,7 @@ public class SeleniumTests// : IDisposable
 
     }
 
-    //[TestInitialize()]
+    [TestInitialize()]
     public void TestInitialize()//ITestOutputHelper output)
     {
         //this.output = output;
