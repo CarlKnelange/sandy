@@ -36,20 +36,19 @@ public class SeleniumTests// : IDisposable
         //driver = new FirefoxDriver();             // en gebruik deze
         driver.Navigate().GoToUrl(appURL);
 
-        waitUntilCountElementEquals(10, "sandy_incoming_msg", 2);
+        //waitUntilCountElementEquals(10, "sandy_incoming_msg", 2);
     }
 
     [TestMethod]
     public void GreetingsTest()
     {
-        //string[] msgs = GetResponse("hoi");
+        string[] msgs = GetResponse("hoi");
 
-        //string expected = "Hallo!";
-        //string actual = msgs[0];
-        //Assert.AreEqual(expected, actual);
+        string expected = "Hallo!";
+        string actual = msgs[0];
+        Assert.AreEqual(expected, actual);
 
-        //UnknownQuestionTest();
-        waitUntilCountElementEquals(10, "sandy_incoming_msg", 2);
+        UnknownQuestionTest();
     }
 
     [TestMethod]
