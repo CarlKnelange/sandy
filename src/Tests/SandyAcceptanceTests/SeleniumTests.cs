@@ -32,8 +32,8 @@ public class SeleniumTests// : IDisposable
         //var options = new FirefoxOptions();
         string geckoPath = Environment.GetEnvironmentVariable("GeckoWebDriver");
         //output.WriteLine(geckoPath);                // comment out deze als je zelf wil testen
-        //driver = new FirefoxDriver(geckoPath);      // deze ook
-        driver = new FirefoxDriver();             // en gebruik deze
+        driver = new FirefoxDriver(geckoPath);      // deze ook
+        //driver = new FirefoxDriver();             // en gebruik deze
         driver.Navigate().GoToUrl(appURL);
 
         //waitUntilCountElementEquals(10, "sandy_incoming_msg", 2);
@@ -60,7 +60,9 @@ public class SeleniumTests// : IDisposable
         //string expected = "Wil je een email adres opgeven?";
         //string actual = msgs[3];
         //Assert.AreEqual(expected, actual);
-        if(driver.FindElement(By.Id("messageInput")) != null)
+        if(driver.Url != "https://sandylinux.azurewebsites.net")
+            Assert.AreEqual(0, 1);
+        if (driver.FindElement(By.Id("messageInput")) != null)
             Assert.IsTrue(true);
         else
             Assert.IsTrue(false);
