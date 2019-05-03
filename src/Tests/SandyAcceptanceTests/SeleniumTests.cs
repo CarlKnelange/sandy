@@ -32,8 +32,8 @@ public class SeleniumTests// : IDisposable
         //var options = new FirefoxOptions();
         string geckoPath = Environment.GetEnvironmentVariable("GeckoWebDriver");
         //output.WriteLine(geckoPath);                // comment out deze als je zelf wil testen
-        driver = new FirefoxDriver(geckoPath);      // deze ook
-        //driver = new FirefoxDriver();             // en gebruik deze
+        //driver = new FirefoxDriver(geckoPath);      // deze ook
+        driver = new FirefoxDriver();             // en gebruik deze
         driver.Navigate().GoToUrl(appURL);
 
         //waitUntilCountElementEquals(10, "sandy_incoming_msg", 2);
