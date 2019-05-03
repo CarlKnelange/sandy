@@ -29,7 +29,7 @@ public class SeleniumTests// : IDisposable
         string appURL = "https://sandylinux.azurewebsites.net";
 
 
-        var options = new FirefoxOptions();
+        //var options = new FirefoxOptions();
         string geckoPath = Environment.GetEnvironmentVariable("GeckoWebDriver");
         //output.WriteLine(geckoPath);                // comment out deze als je zelf wil testen
         driver = new FirefoxDriver(geckoPath);      // deze ook
